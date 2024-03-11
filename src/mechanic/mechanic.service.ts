@@ -18,6 +18,8 @@ export class MechanicService{
     }
     async createMechanic(mechanicDto:CreateMechanicDto):Promise<Mechanic>{
         const newMechanic = new this.mechanicModel(mechanicDto);
+        const pricePerWork = newMechanic.hour * newMechanic.pricePerHour;
+        newMechanic.pricePerWork = pricePerWork;
         return newMechanic.save();
     }
     async removeMechanic(id:string):Promise<Mechanic>{
