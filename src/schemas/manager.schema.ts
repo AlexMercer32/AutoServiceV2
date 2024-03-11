@@ -22,5 +22,7 @@ export class Manager{
         max: 70
     })
     age: number;
+    @Prop()
+    phoneNumber: string;
 }
 export const managerSchema = SchemaFactory.createForClass(Manager);

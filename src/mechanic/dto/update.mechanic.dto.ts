@@ -14,5 +14,7 @@ export class UpdateMechanicDto extends CreateMechanicDto{
     category: MechanicCategoryEnum;
     phoneNumber: number;
     free: true;
+    picePerWork: number;
+    hour: number;
     
 }

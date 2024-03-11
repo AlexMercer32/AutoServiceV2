@@ -49,7 +49,6 @@ export class CreateMechanicDto{
     @Max(40)
     hour: number;
     @IsNumber()
-    @IsNotEmpty()
     @IsPositive()
     picePerWork: number;
     

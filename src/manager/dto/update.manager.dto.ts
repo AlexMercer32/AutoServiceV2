@@ -7,4 +7,5 @@ export class UpdateManagerDto extends CreateManagerDto{
     lastName: string;
     age: number;
     pricePerHour: number;
+    phoneNumber: number;
 }
