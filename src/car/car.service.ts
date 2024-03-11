@@ -19,8 +19,8 @@ export class CarService{
 
     async create(carDto :CreateCarDto):Promise<Car> {
         const newCar = new this.carModel(carDto);
-        if(Car.prototype.carStatus===true) {
-throw new Error(`This ${Car} is already exist,you have a mistake`);
+        if(newCar.carStatus===true) {
+throw new Error(`This ${newCar} is already exist,you have a mistake`);
         } else {
         return newCar.save();
         }
