@@ -27,7 +27,8 @@ export class MechanicService{
         return this.mechanicModel.findByIdAndUpdate(id, mechanicDto,{new:true});
     }
     async getFreeMechanics():Promise<Mechanic[]>{
-        if (Mechanic.prototype.free === true) {
+        const newMechanic = new this.mechanicModel;
+        if (newMechanic.free === true) {
             return this.mechanicModel.find().exec();
         }
         else {
