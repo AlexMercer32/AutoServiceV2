@@ -1,28 +1,18 @@
-import {
-    IsNotEmpty,
-    IsUUID,
-    IsPositive,
-    IsEnum,
-    IsString,
-    MaxLength, IsInt, MinLength, MinDate, MaxDate, Length,  IsNumber,  Min, Max
-} from 'class-validator';
+import { IsNotEmpty, IsPositive, IsEnum, IsString, IsInt, Length, IsNumber, Min, Max, IsBoolean, IsDate, MaxDate, MinDate } from 'class-validator';
 import { CarEngineEnum } from 'src/enums/car.enum';
 
 export class CreateCarDto{
-    @IsUUID()
-    readonly id: string;
     @IsNotEmpty()
     @IsString()
     mark: string;
     @IsString()
     @IsNotEmpty()
     model: string;
-    @IsInt()
-    @IsPositive()
     @IsNotEmpty()
+    @IsDate()
+    @MinDate(require('moment')().subtract(1960, 'y').toDate())
     @MaxDate(new Date())
-    @MinDate(new Date(1940))
-    year: number;
+    year: Date;
     @IsNotEmpty()
     @IsString()
     @Length(17)
@@ -33,20 +23,14 @@ export class CreateCarDto{
     engine: CarEngineEnum;
     @IsPositive()
     @IsInt()
-    @Max(6000)
-    @Min(49)
     engineCapacity: number;
     @IsNotEmpty()
     @IsPositive()
     @IsNumber()
-    @MinLength(1)
-    @MaxLength(6)
     mileage: number;
     @IsNotEmpty()
     @IsNumber()
     @IsPositive()
-    @Max(900)
-    @Min(50)
     enginePower: number;
     @IsNotEmpty()
     @IsInt()
@@ -57,11 +41,10 @@ export class CreateCarDto{
     @IsNotEmpty()
     @IsString()
     color: string;
-    @IsNotEmpty()
     @IsString()
-    kindOfWork: string;
+    @IsNotEmpty()
     owner: string;
     @IsNotEmpty()
-    @IsString()
+    @IsBoolean()
     carStatus: boolean;
 };

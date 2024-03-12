@@ -14,13 +14,5 @@ export class Client{
     lastName: string;
     @Prop()
     phoneNumber: string;
-    @Prop()
-    infoAboutCar: string;
-    @Prop()
-    infoAboutMechanic: string;
-    @Prop()
-    moneyToPay: number;
-    @Prop()
-    infoPay: number;
 }
 export const clientSchema = SchemaFactory.createForClass(Client);

@@ -1,9 +1,9 @@
-import {Injectable} from "@nestjs/common";
-import {InjectModel} from "@nestjs/mongoose";
-import {Model} from "mongoose";
-import {CreateManagerDto} from "./dto/create.manager.dto";
-import {UpdateManagerDto} from "./dto/update.manager.dto";
-import {Manager, ManagerDocument} from "../schemas/manager.schema";
+import { Injectable } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
+import { CreateManagerDto } from "./dto/create.manager.dto";
+import { UpdateManagerDto } from "./dto/update.manager.dto";
+import { Manager, ManagerDocument } from "../schemas/manager.schema";
 
 @Injectable()
 export class ManagerService{

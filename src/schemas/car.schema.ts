@@ -53,8 +53,5 @@ export class Car {
         done: false
     })
     carStatus: boolean;
-
-    @Prop()
-    kindOfWork:string
 }
 export const carSchema = SchemaFactory.createForClass(Car);

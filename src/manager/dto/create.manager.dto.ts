@@ -1,7 +1,5 @@
-import { IsInt, IsNotEmpty, IsPhoneNumber, IsPositive, IsString, IsUUID, Length, Max, Min, max, min } from "class-validator";
+import { IsInt, IsNotEmpty, IsPhoneNumber, IsPositive, IsString, Length, Max, Min } from "class-validator";
 export class CreateManagerDto{
-    @IsUUID()
-    readonly id: string;
     @IsNotEmpty()
     @IsString()
     firstName: string;

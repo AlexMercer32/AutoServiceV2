@@ -5,16 +5,27 @@ import { MechanicCategoryEnum } from "src/enums/mechanic.enum";
 export class UpdateMechanicDto extends CreateMechanicDto{
     @IsOptional()
     firstname: string;
+    @IsOptional()
     lastname: string;
+    @IsOptional()
     experience: string;
+    @IsOptional()
     age: number;
+    @IsOptional()
     quality: string;
+    @IsOptional()
     pricePerHour: number;
+    @IsOptional()
     bestWork: string;
+    @IsOptional()
     category: MechanicCategoryEnum;
+    @IsOptional()
     phoneNumber: number;
+    @IsOptional()
     free: true;
+    @IsOptional()
     picePerWork: number;
+    @IsOptional()
     hour: number;
     
 }
