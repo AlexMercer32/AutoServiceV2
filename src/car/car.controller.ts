@@ -1,31 +1,36 @@
-import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post, Put, UsePipes } from '@nestjs/common';
 import { CreateCarDto } from "src/car/dto/create.car.dto";
 import { UpdateCarDto } from "src/car/dto/update.car.dto";
 import { CarService } from "./car.service";
 import { Car } from "../schemas/car.schema";
+import { isUUID } from 'class-validator';
 @Controller('car')
 export class CarController {
     constructor(private carService: CarService) {
     }
     @Get()
-    getAll() :Promise<Car[]>{
+    getAllCars() :Promise<Car[]>{
         return this.carService.getAllCars();
     }
 
-    @Get(':id')
-    getOne(@Param('id', new ParseUUIDPipe()) id: string):Promise<Car>  {
-        return this.carService.getByIdCar(id);
+    @Get(':uuid')
+    getOneCar(@Param('uuid') uuid: string):Promise<Car>  {
+        return this.carService.getByUUIdCar(uuid);
     }
     @Post()
-    create(@Body() createCarDto: CreateCarDto) :Promise<Car> {
+    createCar(@Body() createCarDto: CreateCarDto) :Promise<Car> {
         return this.carService.createCar(createCarDto);
     }
-    @Delete(':id')
-    remove(@Param('id', new ParseUUIDPipe()) id : string) :Promise<Car> {
-          return this.carService.removeCar(id);
+    @Delete(':uuid')
+    removeCar(@Param('uuid') uuid : string) :Promise<Car> {
+          return this.carService.removeCar(uuid);
     }
-    @Put(':id')
-    update(@Body() updateCarDto: UpdateCarDto, @Param('id', new ParseUUIDPipe()) id : string):Promise<Car>{
-         return this.carService.updateCar(id , updateCarDto);
+    @Put(':uuid')
+    updateCar(@Body() updateCarDto: UpdateCarDto, @Param('uuid') uuid : string):Promise<Car>{
+         return this.carService.updateCar(uuid , updateCarDto);
+    }
+    @Get(':VIN')
+    getOneVINCar(@Param('VIN') VIN: string):Promise<Car[]>  {
+        return this.carService.getByVINCar(VIN);
     }
 }

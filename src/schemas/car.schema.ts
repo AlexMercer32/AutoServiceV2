@@ -10,40 +10,21 @@ export class Car {
     @Prop()
     model: string
 
-    @Prop(new Date())
-    year: number
+    @Prop({type: Date,})
 
-    @Prop({length: 17,
-        unique: true,
-    isRequired: true
+    year: Date;
+    @Prop({length: 17
     })
     VIN: string
-
     @Prop()
     engine: CarEngineEnum;
-    @Prop({
-        maxlength: 4,
-        minlength: 2,
-        isRequired: true
-    })
+    @Prop()
     engineCapacity: number;
-    @Prop({
-        minlength: 1,
-        maxlength: 6,
-        isRequired: true
-    })
+    @Prop()
     mileage: number;
-    @Prop({
-        maxlength: 3,
-        minlength: 2,
-        isRequired: true
-    })
+    @Prop()
     enginePower: number;
-    @Prop({
-        minlength: 3,
-        maxlength: 4,
-        isRequired: true
-    })
+    @Prop()
     weight: number;
     @Prop()
     color: string;

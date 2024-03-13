@@ -3,29 +3,32 @@ import { CreateCarDto } from "./dto/create.car.dto";
 import { InjectModel } from "@nestjs/mongoose";
 import { Car, CarDocument } from "../schemas/car.schema";
 import { UpdateCarDto } from "src/car/dto/update.car.dto";
-import { Model } from "mongoose";
+import mongoose, { Model, mongo } from "mongoose";
 @Injectable()
 export class CarService{
     constructor(@InjectModel(Car.name) private carModel : Model<CarDocument>) {}
 
 
-    async getAllCars() : Promise<Car[]> {
+    async getAllCars(): Promise<Car[]> {
         return this.carModel.find().exec();
     }
 
-    async getByIdCar(id : string) :Promise<Car> {
-        return this.carModel.findById(id);
+    async getByUUIdCar(uuid: string): Promise<Car> {
+        return this.carModel.findById(uuid);
     }
 
-    async createCar(carDto :CreateCarDto):Promise<Car> {
+    async createCar(carDto :CreateCarDto): Promise<Car> {
         const newCar = new this.carModel(carDto);
         return newCar.save();
     };
-    async removeCar(id: string) :Promise<Car> {
-        return this.carModel.findByIdAndDelete(id);
+    async removeCar(uuid: string): Promise<Car> {
+        return this.carModel.findByIdAndDelete(uuid);
     };
 
-    async updateCar(id: string, carDto: UpdateCarDto) :Promise<Car>{
-        return this.carModel.findByIdAndUpdate(id, carDto,{done: true});
+    async updateCar(uuid: string, carDto: UpdateCarDto): Promise<Car>{
+        return this.carModel.findByIdAndUpdate(uuid, carDto,{done: true});
+    }
+    async getByVINCar(VIN: string): Promise<Car[]> {
+         return this.carModel.find({VIN: VIN}).exec();
     }
 }

@@ -10,7 +10,7 @@ export class UpdateCarDto extends CreateCarDto {
     @IsOptional()
     engine: CarEngineEnum;
     @IsOptional()
-    year: number;
+    year: Date;
     @IsOptional()
     VIN: string;
     @IsOptional()

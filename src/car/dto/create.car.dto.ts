@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsPositive, IsEnum, IsString, IsInt, Length, IsNumber, Min, Max, IsBoolean, IsDate, MaxDate, MinDate } from 'class-validator';
+import { IsNotEmpty, IsPositive, IsEnum, IsString, IsInt, Length, IsNumber, Min, Max, IsBoolean, IsDate, MaxDate, MinDate, IsDateString } from 'class-validator';
 import { CarEngineEnum } from 'src/enums/car.enum';
 
 export class CreateCarDto{
@@ -9,9 +9,7 @@ export class CreateCarDto{
     @IsNotEmpty()
     model: string;
     @IsNotEmpty()
-    @IsDate()
-    @MinDate(require('moment')().subtract(1960, 'y').toDate())
-    @MaxDate(new Date())
+    @IsDateString()
     year: Date;
     @IsNotEmpty()
     @IsString()
