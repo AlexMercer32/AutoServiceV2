@@ -14,8 +14,6 @@ export class UpdateMechanicDto extends CreateMechanicDto{
     @IsOptional()
     quality: string;
     @IsOptional()
-    pricePerHour: number;
-    @IsOptional()
     bestWork: string;
     @IsOptional()
     category: MechanicCategoryEnum;
@@ -23,9 +21,4 @@ export class UpdateMechanicDto extends CreateMechanicDto{
     phoneNumber: number;
     @IsOptional()
     free: true;
-    @IsOptional()
-    picePerWork: number;
-    @IsOptional()
-    hour: number;
-    
 }

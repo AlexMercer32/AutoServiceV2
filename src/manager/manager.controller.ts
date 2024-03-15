@@ -4,7 +4,6 @@ import {
     Delete,
     Get,
     Param,
-    ParseUUIDPipe,
     Post,
     Put,
 } from '@nestjs/common';
@@ -12,6 +11,7 @@ import {CreateManagerDto} from "./dto/create.manager.dto";
 import {UpdateManagerDto} from "./dto/update.manager.dto";
 import {ManagerService} from "./manager.service";
 import {Manager} from "../schemas/manager.schema";
+import { IsMongoId } from 'class-validator';
 @Controller('manager')
 export class ManagerController {
     constructor(private managerService: ManagerService) {
@@ -22,7 +22,8 @@ export class ManagerController {
     }
 
     @Get(':id')
-    getOneManager(@Param('id', new ParseUUIDPipe()) id: string):Promise<Manager>  {
+    @IsMongoId()
+    getOneManager(@Param('id') id: string):Promise<Manager>  {
         return this.managerService.getByIdManager(id);
     }
     @Post()
@@ -30,11 +31,13 @@ export class ManagerController {
         return this.managerService.createManager(createManagerDto);
     }
     @Delete(':id')
-    removeManager(@Param('id', new ParseUUIDPipe()) id : string) :Promise<Manager> {
+    @IsMongoId()
+    removeManager(@Param('id') id : string) :Promise<Manager> {
           return this.managerService.removeManager(id);
     }
     @Put(':id')
-    updateManager(@Body() updateManagerDto: UpdateManagerDto, @Param('id', new ParseUUIDPipe()) id : string):Promise<Manager>{
+    @IsMongoId()
+    updateManager(@Body() updateManagerDto: UpdateManagerDto, @Param('id') id : string):Promise<Manager>{
          return this.managerService.updateManager(id , updateManagerDto);
     }
 }

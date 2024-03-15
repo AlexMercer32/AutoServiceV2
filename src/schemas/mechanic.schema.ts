@@ -18,8 +18,6 @@ export class Mechanic{
     @Prop()
     quality: string;
     @Prop()
-    pricePerHour: number;
-    @Prop()
     bestWork:string;
     @Prop({
         enum: MechanicCategoryEnum
@@ -27,11 +25,11 @@ export class Mechanic{
     category: MechanicCategoryEnum
     @Prop()
     phoneNumber: number;
-    @Prop()
+    @Prop({
+        occupate: false,
+        ready: true,
+        default: true
+    })
     free: true;
-    @Prop()
-    hour: number;
-    @Prop()
-    pricePerWork: number;
 }
 export const mechanicSchema = SchemaFactory.createForClass(Mechanic);

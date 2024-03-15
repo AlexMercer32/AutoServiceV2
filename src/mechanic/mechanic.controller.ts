@@ -1,17 +1,20 @@
 import {MechanicService} from "./mechanic.service";
 import {
+    BadRequestException,
     Body,
     Controller,
     Delete,
     Get,
     Param,
-    ParseUUIDPipe,
     Post,
     Put,
+    Query,
 } from "@nestjs/common";
 import {CreateMechanicDto} from "./dto/create.mechanic.dto";
 import {UpdateMechanicDto} from "./dto/update.mechanic.dto";
 import {Mechanic} from "../schemas/mechanic.schema";
+import { IsMongoId } from "class-validator";
+
 @Controller('mechanic')
 export class MechanicController{
 
@@ -21,20 +24,32 @@ export class MechanicController{
     getAllMechanics(): Promise<Mechanic[]>{
         return this.mechanicService.getAllMechanics();
     }
-    @Get(':id')
-    getOneMechanic(@Param('id', new ParseUUIDPipe()) id:string) :Promise<Mechanic>{
-        return this.mechanicService.getByIdMechanics(id);
+    @Get(':search')
+    @IsMongoId()
+    getOneMechanic(
+        @Query('id') id:string,
+        @Query('free') free: boolean) 
+        :Promise<Mechanic>{
+            if(id){
+                return this.mechanicService.getByIdMechanics(id);
+            }
+            else if(free){
+                return this.mechanicService.getFreeMechanics(free);
+            }
+            throw new BadRequestException('Wrong search parameters');
     }
     @Post()
     createMechanic(@Body() createMechanicDto: CreateMechanicDto) :Promise<Mechanic>{
         return this.mechanicService.createMechanic(createMechanicDto);
     }
     @Delete(':id')
-    removeMechanic(@Param('id', new ParseUUIDPipe()) id:string) :Promise<Mechanic>{
+    @IsMongoId()
+    removeMechanic(@Param('id') id:string) :Promise<Mechanic>{
         return this.mechanicService.removeMechanic(id);
     }
     @Put(':id')
-    update(@Body() updateMechanicDto : UpdateMechanicDto , @Param('id', new ParseUUIDPipe()) id: string):Promise<Mechanic>{
+    @IsMongoId()
+    update(@Body() updateMechanicDto : UpdateMechanicDto , @Param('id') id: string):Promise<Mechanic>{
         return this.mechanicService.updateMechanic(id, updateMechanicDto);
     }
 }

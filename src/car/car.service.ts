@@ -1,9 +1,10 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { CreateCarDto } from "./dto/create.car.dto";
 import { InjectModel } from "@nestjs/mongoose";
 import { Car, CarDocument } from "../schemas/car.schema";
 import { UpdateCarDto } from "src/car/dto/update.car.dto";
-import mongoose, { Model, mongo } from "mongoose";
+import { Model } from "mongoose";
+
 @Injectable()
 export class CarService{
     constructor(@InjectModel(Car.name) private carModel : Model<CarDocument>) {}
@@ -18,8 +19,14 @@ export class CarService{
     }
 
     async createCar(carDto :CreateCarDto): Promise<Car> {
-        const newCar = new this.carModel(carDto);
-        return newCar.save();
+            const newCar = new this.carModel(carDto);
+            const searchCar = new this.carModel;
+            if(searchCar.carStatus === true){
+                throw new BadRequestException('This car allready exist');
+            }else if(searchCar.carStatus === false){
+                return searchCar.save();
+            }
+            return newCar.save(); 
     };
     async removeCar(uuid: string): Promise<Car> {
         return this.carModel.findByIdAndDelete(uuid);
@@ -28,7 +35,10 @@ export class CarService{
     async updateCar(uuid: string, carDto: UpdateCarDto): Promise<Car>{
         return this.carModel.findByIdAndUpdate(uuid, carDto,{done: true});
     }
-    async getByVINCar(VIN: string): Promise<Car[]> {
-         return this.carModel.find({VIN: VIN}).exec();
+    async getByVINCar(VIN: string): Promise<Car> {
+         const carVIN = await this.carModel.findOne({
+            where: {VIN}
+         });
+         return carVIN;
     }
 }

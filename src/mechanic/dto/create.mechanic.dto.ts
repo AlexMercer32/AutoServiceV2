@@ -1,8 +1,6 @@
-import { IsBoolean, IsDate, IsEnum, IsInt, IsNotEmpty, IsNumber, IsPhoneNumber, IsPositive, IsString, IsUUID, Length, Max, Min, max} from "class-validator";
+import { IsBoolean, IsEnum, IsInt, IsNotEmpty, IsPhoneNumber, IsPositive, IsString, Length, Max, Min } from "class-validator";
 import { MechanicCategoryEnum } from "src/enums/mechanic.enum";
 export class CreateMechanicDto{
-    @IsUUID()
-    readonly id: string;
     @IsString()
     @IsNotEmpty()
     firstname: string;
@@ -26,9 +24,6 @@ export class CreateMechanicDto{
     @IsPositive()
     @Min(200)
     @Max(500)
-    pricePerHour: number;
-    @IsString()
-    @IsNotEmpty()
     bestWork: string;
     @IsEnum(MechanicCategoryEnum)
     @IsNotEmpty()
@@ -42,14 +37,4 @@ export class CreateMechanicDto{
     @IsBoolean()
     @IsNotEmpty()
     free: true;
-    @IsNumber()
-    @IsNotEmpty()
-    @IsPositive()
-    @Min(0.1)
-    @Max(40)
-    hour: number;
-    @IsNumber()
-    @IsPositive()
-    picePerWork: number;
-    
 }

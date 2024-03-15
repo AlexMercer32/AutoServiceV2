@@ -18,8 +18,6 @@ export class MechanicService{
     }
     async createMechanic(mechanicDto:CreateMechanicDto):Promise<Mechanic>{
         const newMechanic = new this.mechanicModel(mechanicDto);
-        const pricePerWork = newMechanic.hour * newMechanic.pricePerHour;
-        newMechanic.pricePerWork = pricePerWork;
         return newMechanic.save();
     }
     async removeMechanic(id:string):Promise<Mechanic>{
@@ -28,13 +26,10 @@ export class MechanicService{
     async updateMechanic(id:string, mechanicDto:UpdateMechanicDto):Promise<Mechanic>{
         return this.mechanicModel.findByIdAndUpdate(id, mechanicDto,{new:true});
     }
-    async getFreeMechanics():Promise<Mechanic[]>{
-        const newMechanic = new this.mechanicModel;
-        if (newMechanic.free === true) {
-            return this.mechanicModel.find().exec();
-        }
-        else {
-        throw new Error ('All Mechanics are buisy now, please wait...');
-        }
+    async getFreeMechanics(free: boolean):Promise<Mechanic>{
+        const freeMechanic =  await this.mechanicModel.findOne({
+            where: {free}
+        });
+        return freeMechanic;
     }
 }
