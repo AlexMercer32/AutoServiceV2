@@ -18,7 +18,7 @@ export class UpdateMechanicDto extends CreateMechanicDto{
     @IsOptional()
     category: MechanicCategoryEnum;
     @IsOptional()
-    phoneNumber: number;
+    phoneNumber: string;
     @IsOptional()
     free: true;
 }

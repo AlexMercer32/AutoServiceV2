@@ -18,7 +18,14 @@ export class MechanicService{
     }
     async createMechanic(mechanicDto:CreateMechanicDto):Promise<Mechanic>{
         const newMechanic = new this.mechanicModel(mechanicDto);
-        return newMechanic.save();
+        const freeMechanic = new this.mechanicModel;
+        if(freeMechanic.free ===true){
+            return newMechanic.save();
+        } 
+        else{
+            throw new Error('This mechanic allredy have work,please wait...');
+
+        }
     }
     async removeMechanic(id:string):Promise<Mechanic>{
         return this.mechanicModel.findByIdAndDelete(id);

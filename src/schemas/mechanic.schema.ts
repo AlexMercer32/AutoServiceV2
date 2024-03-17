@@ -5,9 +5,9 @@ export type MechanicDocument = Mechanic & Document;
 @Schema()
 export class Mechanic{
     @Prop()
-    firstname:string;
+    firstName:string;
     @Prop()
-    lastname:string;
+    lastName:string;
     @Prop()
     experience: string;
     @Prop({
@@ -24,12 +24,12 @@ export class Mechanic{
     })
     category: MechanicCategoryEnum
     @Prop()
-    phoneNumber: number;
+    phoneNumber: string;
     @Prop({
         occupate: false,
         ready: true,
         default: true
     })
-    free: true;
+    free: boolean;
 }
 export const mechanicSchema = SchemaFactory.createForClass(Mechanic);
