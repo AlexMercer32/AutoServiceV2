@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  app:
+    container_name: Alex
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_NAME: Service;
+      DATABASE_USER: shurganovalex
+      DATABASE_PASS: yxvQb4xsVIcAMX7r
+      DATABASE_URI: mongodb+srv://shurganovalex:yxvQb4xsVIcAMX7r@alexmercer.nhguebu.mongodb.net/Service;
+    ports:
+      - '3000:3000'
+    depends_on:
+      - database
+
+  database:
+    image: mongo:6.0
+    container_name: mongodb
+    restart: always
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: shurganovalex
+      MONGO_INITDB_ROOT_PASSWORD: yxvQb4xsVIcAMX7r

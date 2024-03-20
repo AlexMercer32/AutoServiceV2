@@ -16,7 +16,6 @@ export class CreateWorkDto{
     @IsNotEmpty()
     @Max(9)
     carsInWork: number;
-    @IsNotEmpty()
     @IsPositive()
     @IsNumber()
     totalPrice: number;
