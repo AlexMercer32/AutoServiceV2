@@ -11,7 +11,7 @@ import {CreateManagerDto} from "./dto/create.manager.dto";
 import {UpdateManagerDto} from "./dto/update.manager.dto";
 import {ManagerService} from "./manager.service";
 import {Manager} from "../schemas/manager.schema";
-import { IsMongoId } from 'class-validator';
+
 @Controller('manager')
 export class ManagerController {
     constructor(private managerService: ManagerService) {
@@ -22,7 +22,6 @@ export class ManagerController {
     }
 
     @Get(':id')
-    @IsMongoId()
     getOneManager(@Param('id') id: string):Promise<Manager>  {
         return this.managerService.getByIdManager(id);
     }
@@ -31,12 +30,10 @@ export class ManagerController {
         return this.managerService.createManager(createManagerDto);
     }
     @Delete(':id')
-    @IsMongoId()
     removeManager(@Param('id') id : string) :Promise<Manager> {
           return this.managerService.removeManager(id);
     }
     @Put(':id')
-    @IsMongoId()
     updateManager(@Body() updateManagerDto: UpdateManagerDto, @Param('id') id : string):Promise<Manager>{
          return this.managerService.updateManager(id , updateManagerDto);
     }

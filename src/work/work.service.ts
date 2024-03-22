@@ -29,20 +29,26 @@ export class WorkService{
     async updateWork(id:string, workDto:UpdateWorkDto):Promise<Work>{
         return this.workModel.findByIdAndUpdate(id, workDto,{new:true});
     }
-    async getTotalPrice(totalPrice: number): Promise<Work>{
-       const allPrice = await this.workModel.findOne({
-        where:{totalPrice}
-       });
-       return allPrice;
-    }
-    async createAllPrice(totalPrice: number): Promise<Work>{
-        const hour = new this.workModel;
-        const pricePerWork = new this.workModel;
+    async getAllPrice(totalPrice: number): Promise<Work>{
+        const hour = await this.getHour;
+        const pricePerWork = await this.getPricePerWork;
         const newTotalPrice = (hour, pricePerWork)=>{
             totalPrice = hour * pricePerWork;
             return totalPrice;
         }
         newTotalPrice(hour, pricePerWork);
         return
+    }
+    async getHour(hour: number): Promise<Work>{
+        const workHour = await this.workModel.findOne({
+            where: {hour}
+        });
+        return workHour;
+    }
+    async getPricePerWork(pricePerWork: number): Promise<Work>{
+        const mPricePerWork = await this.workModel.findOne({
+            where: {pricePerWork}
+        });
+        return mPricePerWork;
     }
 }

@@ -18,13 +18,9 @@ export class MechanicService{
     }
     async createMechanic(mechanicDto:CreateMechanicDto):Promise<Mechanic>{
         const newMechanic = new this.mechanicModel(mechanicDto);
-        const freeMechanic = new this.mechanicModel;
-        if(freeMechanic.free ===true){
-            return newMechanic.save();
-        } 
-        else{
-            throw new Error('This mechanic allredy have work,please wait...');
-
+        const mechanicFree = this.getFreeMechanics
+        if(mechanicFree){
+           return newMechanic.save();
         }
     }
     async removeMechanic(id:string):Promise<Mechanic>{
@@ -37,6 +33,9 @@ export class MechanicService{
         const freeMechanic =  await this.mechanicModel.findOne({
             where: {free}
         });
-        return freeMechanic;
+        if(freeMechanic.free === true){
+            return freeMechanic;
+        }
+        throw new Error('This mechanic is not free, please wait...')
     }
 }

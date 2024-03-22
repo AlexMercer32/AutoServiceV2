@@ -13,7 +13,6 @@ import {
 import {CreateMechanicDto} from "./dto/create.mechanic.dto";
 import {UpdateMechanicDto} from "./dto/update.mechanic.dto";
 import {Mechanic} from "../schemas/mechanic.schema";
-import { IsMongoId } from "class-validator";
 
 @Controller('mechanic')
 export class MechanicController{
@@ -25,7 +24,6 @@ export class MechanicController{
         return this.mechanicService.getAllMechanics();
     }
     @Get(':search')
-    @IsMongoId()
     getOneMechanic(
         @Query('id') id:string,
         @Query('free') free: boolean) 
@@ -43,12 +41,10 @@ export class MechanicController{
         return this.mechanicService.createMechanic(createMechanicDto);
     }
     @Delete(':id')
-    @IsMongoId()
     removeMechanic(@Param('id') id:string) :Promise<Mechanic>{
         return this.mechanicService.removeMechanic(id);
     }
     @Put(':id')
-    @IsMongoId()
     update(@Body() updateMechanicDto : UpdateMechanicDto , @Param('id') id: string):Promise<Mechanic>{
         return this.mechanicService.updateMechanic(id, updateMechanicDto);
     }

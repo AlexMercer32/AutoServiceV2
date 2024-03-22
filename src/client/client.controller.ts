@@ -22,7 +22,6 @@ export class ClientController {
     }
 
     @Get(':id')
-    @IsMongoId()
     getOneClient(@Param('id') id: string) :Promise<Client>  {
         return this.clientService.getByIdClient(id);
     }
@@ -31,12 +30,10 @@ export class ClientController {
         return this.clientService.createClient(createClientDto);
     }
     @Delete(':id')
-    @IsMongoId()
     removeClient(@Param('id') id : string) :Promise<Client> {
           return this.clientService.removeClient(id);
     }
     @Put(':id')
-    @IsMongoId()
     updateClient(@Body() updateClientDto: UpdateClientDto, @Param('id') id : string) :Promise<Client>{
          return this.clientService.updateClient(id , updateClientDto);
     }

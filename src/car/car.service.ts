@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { CreateCarDto } from "./dto/create.car.dto";
 import { InjectModel } from "@nestjs/mongoose";
 import { Car, CarDocument } from "../schemas/car.schema";
@@ -20,12 +20,6 @@ export class CarService{
 
     async createCar(carDto :CreateCarDto): Promise<Car> {
             const newCar = new this.carModel(carDto);
-            const searchCar = new this.carModel;
-            if(searchCar.carStatus === true){
-                throw new BadRequestException('This car allready exist');
-            }else if(searchCar.carStatus === false){
-                return searchCar.save();
-            }
             return newCar.save(); 
     };
     async removeCar(uuid: string): Promise<Car> {
@@ -40,5 +34,14 @@ export class CarService{
             where: {VIN}
          });
          return carVIN;
+    }
+    async getCarByCarStatus(carStatus: boolean): Promise<Car>{
+        const carsStatus = await this.carModel.findOne({
+            where: {carStatus}
+        });
+        if(carsStatus.carStatus===false){
+            throw new Error('This car is in work, you cant write it');
+        }
+        return carsStatus;
     }
 }

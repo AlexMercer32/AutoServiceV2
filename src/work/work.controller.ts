@@ -24,7 +24,6 @@ export class WorkController {
     }
 
     @Get(':search')
-    @IsMongoId()
     getWork(
         @Query('id') id: string,
         @Query('price') totalPrice: number
@@ -33,7 +32,7 @@ export class WorkController {
                 return this.workService.getByIdWork(id);
             }
             if(totalPrice){
-                return this.workService.getTotalPrice(totalPrice);
+                return this.workService.getAllPrice(totalPrice);
             }
             throw new BadRequestException('Wrong search parameters');
     }
@@ -42,17 +41,15 @@ export class WorkController {
         return this.workService.createWork(createWorkDto);
     }
     @Delete(':id')
-    @IsMongoId()
     removeWork(@Param('id') id : string) :Promise<Work> {
           return this.workService.removeWork(id);
     }
     @Put(':id')
-    @IsMongoId()
     updateWork(@Body() updateWorkDto: UpdateWorkDto, @Param('id') id : string):Promise<Work>{
          return this.workService.updateWork(id , updateWorkDto);
     }
-    @Post(':price')
-    createAllPrice(@Body() totalPrice : number): Promise<Work>{
-        return this.workService.createAllPrice(totalPrice);
+    @Get(':price')
+    getAllPrice(@Body() totalPrice : number): Promise<Work>{
+        return this.workService.getAllPrice(totalPrice);
     }
 }

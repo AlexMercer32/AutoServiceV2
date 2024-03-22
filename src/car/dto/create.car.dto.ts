@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsPositive, IsEnum, IsString, IsInt, Length, IsNumber, Min, Max, IsBoolean, IsDate, MaxDate, MinDate, IsDateString } from 'class-validator';
+import { IsNotEmpty, IsPositive, IsEnum, IsString, IsInt, Length, IsNumber, Min, Max, IsBoolean, IsDateString } from 'class-validator';
 import { CarEngineEnum } from 'src/enums/car.enum';
 
 export class CreateCarDto{
