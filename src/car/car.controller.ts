@@ -1,8 +1,8 @@
 import { BadRequestException, Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
-import { CreateCarDto } from "src/car/dto/create.car.dto";
-import { UpdateCarDto } from "src/car/dto/update.car.dto";
+import { CreateCarDto } from "src/car/create.car.dto";
+import { UpdateCarDto } from "src/car/update.car.dto";
 import { CarService } from "./car.service";
-import { Car } from "../schemas/car.schema";
+import { Car } from "./car.schema";
 import {MongoObjectIdPipe} from "../../custom.mongoIdPipe"
 
 @Controller('car')

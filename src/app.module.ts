@@ -4,12 +4,11 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import {CarsModule} from "./car/car.module";
-import { MechanicModule } from "./mechanic/mechanic.module";
-import { ManagerModule } from "./manager/manager.module";
+
 
 @Module({
   imports: [ConfigModule.forRoot(),
-      CarsModule, MechanicModule, ManagerModule,
+      CarsModule,
       MongooseModule.forRootAsync({
           imports: [ConfigModule],
           inject: [ConfigService],

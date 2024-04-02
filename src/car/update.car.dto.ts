@@ -1,6 +1,6 @@
 import {IsOptional,} from "class-validator";
 import { CreateCarDto } from "./create.car.dto";
-import { CarEngineEnum } from "src/enums/car.enum";
+import { CarEngineEnum } from "src/car/car.enum";
 
 export class UpdateCarDto extends CreateCarDto {
     @IsOptional()
