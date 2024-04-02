@@ -29,7 +29,7 @@ export class CarController {
     }
     @Post()
     createCar(@Body() createCarDto: CreateCarDto): Promise<Car> {
-        const searchCar = this.carService.getCarByCarStatus;
+        const searchCar = this.carService.getCarByCarStatus(true);
         if(searchCar){
             return this.carService.createCar(createCarDto);
         }

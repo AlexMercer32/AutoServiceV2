@@ -31,8 +31,6 @@ export class Car {
     @Prop()
     owner: string;
     @Prop({
-        inWork: false,
-        done: true,
         default: false
     })
     carStatus: boolean;

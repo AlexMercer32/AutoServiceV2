@@ -39,9 +39,6 @@ export class CarService{
         const carsStatus = await this.carModel.findOne({
             where: {carStatus}
         });
-        if(carsStatus.carStatus===false){
-            throw new Error('This car is in work, you cant write it');
-        }
         return carsStatus;
     }
 }
