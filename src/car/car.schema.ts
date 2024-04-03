@@ -6,15 +6,11 @@ export type CarDocument = Car & Document;
 export class Car {
     @Prop()
     mark: string
-
     @Prop()
     model: string
-
     @Prop({type: Date,})
-
     year: Date;
-    @Prop({length: 17
-    })
+    @Prop()
     VIN: string
     @Prop()
     engine: CarEngineEnum;
