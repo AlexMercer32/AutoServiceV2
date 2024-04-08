@@ -7,7 +7,8 @@ import {CarsModule} from "./car/car.module";
 
 
 @Module({
-  imports: [ConfigModule.forRoot(),
+  imports: 
+    [ConfigModule.forRoot(),
       CarsModule,
       MongooseModule.forRootAsync({
           imports: [ConfigModule],

@@ -39,6 +39,6 @@ export class CarService{
         const carsStatus = await this.carModel.findOne({
             where: {carStatus}
         });
-        return carsStatus;
+      return carsStatus;
     }
 }

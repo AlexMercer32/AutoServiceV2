@@ -14,5 +14,4 @@ import {Car, carSchema} from "./car.schema";
     ]
 })
 export class CarsModule{
-
 }
